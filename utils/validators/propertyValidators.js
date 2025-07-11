@@ -1,0 +1,71 @@
+import Joi from 'joi';
+
+export const createPropertySchema = Joi.object({
+  title: Joi.string().min(2).max(255).required(),
+  slug: Joi.string().min(2).max(255),
+  price: Joi.number().positive(),
+  city: Joi.string().max(100),
+  locality: Joi.string().max(150),
+  address: Joi.string().max(500),
+  area_sqft: Joi.number().positive(),
+  bedrooms: Joi.number().integer().min(0),
+  bathrooms: Joi.number().integer().min(0),
+  balconies: Joi.number().integer().min(0),
+  bhk: Joi.number().integer().min(0),
+  property_type: Joi.string().valid('apartment', 'villa', 'plot', 'house', 'office', 'shop'),
+  purpose: Joi.string().valid('rent', 'sale'),
+  furnishing: Joi.string().valid('furnished', 'unfurnished', 'semi-furnished'),
+  available_for: Joi.string().valid('family', 'bachelor', 'both'),
+  status: Joi.string().valid('draft', 'published', 'blocked', 'sold', 'rented').default('draft'),
+  is_featured: Joi.boolean().default(false),
+  owner_id: Joi.number().integer(),
+  description: Joi.string().max(2000),
+  meta_title: Joi.string().max(255),
+  meta_description: Joi.string().max(500),
+  meta_keywords: Joi.string().max(300),
+  canonical_url: Joi.string().max(300),
+  featured_image: Joi.string().max(300),
+  floor_plan: Joi.string().max(300),
+  map_latitude: Joi.number(),
+  map_longitude: Joi.number(),
+  map_address: Joi.string().max(300),
+  features: Joi.array().items(Joi.string()),
+  amenities: Joi.array().items(Joi.number().integer())
+});
+
+export const updatePropertySchema = Joi.object({
+  title: Joi.string().min(2).max(255),
+  slug: Joi.string().min(2).max(255),
+  price: Joi.number().positive(),
+  city: Joi.string().max(100),
+  locality: Joi.string().max(150),
+  address: Joi.string().max(500),
+  area_sqft: Joi.number().positive(),
+  bedrooms: Joi.number().integer().min(0),
+  bathrooms: Joi.number().integer().min(0),
+  balconies: Joi.number().integer().min(0),
+  bhk: Joi.number().integer().min(0),
+  property_type: Joi.string().valid('apartment', 'villa', 'plot', 'house', 'office', 'shop'),
+  purpose: Joi.string().valid('rent', 'sale'),
+  furnishing: Joi.string().valid('furnished', 'unfurnished', 'semi-furnished'),
+  available_for: Joi.string().valid('family', 'bachelor', 'both'),
+  status: Joi.string().valid('draft', 'published', 'blocked', 'sold', 'rented'),
+  is_featured: Joi.boolean(),
+  owner_id: Joi.number().integer(),
+  description: Joi.string().max(2000),
+  meta_title: Joi.string().max(255),
+  meta_description: Joi.string().max(500),
+  meta_keywords: Joi.string().max(300),
+  canonical_url: Joi.string().max(300),
+  featured_image: Joi.string().max(300),
+  floor_plan: Joi.string().max(300),
+  map_latitude: Joi.number(),
+  map_longitude: Joi.number(),
+  map_address: Joi.string().max(300),
+  features: Joi.array().items(Joi.string()),
+  amenities: Joi.array().items(Joi.number().integer())
+});
+
+export const updateStatusSchema = Joi.object({
+  status: Joi.string().valid('draft', 'published', 'blocked', 'sold', 'rented').required()
+});
